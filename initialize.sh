@@ -29,19 +29,7 @@ logic ()
     # -------------------
 
     git remote rename 'origin' 'initial'
-    cabal init                    \
-        --is-executable           \
-        --source-dir 'src'        \
-        --license 'ISC'           \
-        --synopsis "$description" \
-        --non-interactive
-    cabal sandbox init
     echo "$description" > README.md
-    mkdir -p src
-    touch src/Main.hs
-    echo 'module Main where' >> src/Main.hs
-    echo                     >> src/Main.hs
-    echo 'main = return ()'  >> src/Main.hs
 
     # Kill itself.
     # ------------
@@ -53,8 +41,8 @@ logic ()
 
     git branch master
     git checkout master
-    git add "${name}.cabal" 'cabal.sandbox.config' 'README.md' 'LICENSE' 'src' 'Setup.hs'
-    git commit -m "Automatic initial commit. All things set up."
+    git add 'README.md'
+    git commit -m 'Automatic initial commit. All things set up.'
     
     # Push local changes to github.
     # -----------------------------
